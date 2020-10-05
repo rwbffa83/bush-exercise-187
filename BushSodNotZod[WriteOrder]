@@ -1,0 +1,66 @@
+package edu.cpt187.bush.exercise6;
+
+//AUTHOR: Richard Bush
+//COURSE: CPT187
+//PURPOSE: To write an order for a final report for purchases from a hardware store
+//CREATE DATE: 09/30/20
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class WriteOrder 
+{
+	//defining class attributes
+	private boolean fileFoundFlag = false;
+	private String masterFileName = "";
+	private int recordCount = 0;
+	
+	//defining class behaviors
+	//defining non default constructor WriteOrder
+	WriteOrder(String borrowedFileName)
+	{
+		masterFileName = borrowedFileName;
+	}
+	
+	//setWriteOrder
+	public void setWriteOrder(int borrowedItemID, String borrowedItemName, double borrowedItemPrice, 
+		int borrowedQuantity, double borrowedOrderCost)
+	{
+		//try
+		try
+		{
+			//PrintWriter + FileWriter
+			PrintWriter filePW = new PrintWriter(new FileWriter(masterFileName, true));
+			
+			filePW.printf("%n%d\t%s\t%f\t%d\t%f", borrowedItemID, borrowedItemName, borrowedItemPrice, 
+				borrowedQuantity, borrowedOrderCost);
+			
+			fileFoundFlag = true;
+			filePW.close();
+			recordCount ++;
+		}//end of try
+		catch (IOException ex)
+		{
+			fileFoundFlag = false;
+		}//end of catch
+	}
+	
+	//getFileFoundFlag
+	public boolean fetFileFoundFlag()
+	{
+		return fileFoundFlag;
+	}
+	
+	//getFileName
+	public String getFileName()
+	{
+		return masterFileName;
+	}
+	
+	//getRecordCount
+	public int getRecordCount()
+	{
+		return recordCount;
+	}
+}
